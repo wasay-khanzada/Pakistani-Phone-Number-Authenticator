@@ -1,21 +1,137 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Phone Number Validation</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div class="container">
-      <form id="phoneForm">
-        <label for="phone">Enter Phone Number :</label>
-        <input type="text" id="phone" name="phone" required />
-        <span id="message"></span>
-        <br /><br />
-        <button type="submit">Validate</button>
-      </form>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pakistani Phone Number Authenticator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="page">
+
+  <div class="corner-flag" aria-hidden="true">
+    <svg viewBox="0 0 200 200">
+      <rect width="200" height="200" fill="var(--deep-green)"/>
+      <g fill="#fff" transform="translate(112,78)">
+        <circle r="26"/>
+        <circle r="26" fill="var(--deep-green)" cx="10" cy="-4"/>
+        <path d="M27 -30 L31 -14 L47 -14 L34 -4 L38 12 L27 2 L16 12 L20 -4 L7 -14 L23 -14 Z"/>
+      </g>
+    </svg>
+  </div>
+
+  <header class="hero">
+    <div class="hero-inner">
+
+      <div class="hero-copy">
+        <p class="eyebrow">Client&#8209;side validation tool</p>
+
+        <h1 class="headline">
+          <span class="line accent">Pa<span class="tower" aria-hidden="true">
+            <svg viewBox="0 0 40 90" preserveAspectRatio="xMidYMax meet">
+              <rect x="16" y="4" width="8" height="10"/>
+              <polygon points="12,16 28,16 24,32 16,32"/>
+              <rect x="14" y="32" width="12" height="6"/>
+              <polygon points="10,40 30,40 25,58 15,58"/>
+              <rect x="8" y="58" width="24" height="8"/>
+              <rect x="4" y="66" width="32" height="10"/>
+              <rect x="0" y="76" width="40" height="10"/>
+            </svg>
+          </span>kistani</span>
+          <span class="line ink">Phone Number</span>
+          <span class="line accent">Authenticator</span>
+        </h1>
+
+        <div class="rule"><span class="dot"></span></div>
+
+        <ul class="feature-list">
+          <li>
+            <span class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <div>
+              <strong>Instant validation</strong>
+              <p>Get immediate feedback as you type &mdash; no submit button required.</p>
+            </div>
+          </li>
+          <li>
+            <span class="feature-icon">JS</span>
+            <div>
+              <strong>JavaScript + regex</strong>
+              <p>Every check is powered by a single regular expression.</p>
+            </div>
+          </li>
+          <li>
+            <span class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none"><rect x="7" y="2" width="10" height="20" rx="2" stroke="#fff" stroke-width="2"/><circle cx="12" cy="18.4" r="0.9" fill="#fff"/></svg>
+            </span>
+            <div>
+              <strong>Clean &amp; responsive</strong>
+              <p>Lightweight, fast, and built to work on any screen size.</p>
+            </div>
+          </li>
+        </ul>
+
+        <div class="badges">
+          <span class="badge badge-js">JS</span>
+          <span class="badge badge-re">{&nbsp;}&nbsp;REGEX</span>
+        </div>
+      </div>
+
+      <div class="hero-demo">
+        <section class="card" aria-labelledby="card-title">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none"><rect x="6" y="2" width="12" height="20" rx="2.5" stroke="#fff" stroke-width="1.8"/><path d="M9.2 12.2l1.8 1.8 4-4.2" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h2 id="card-title">Validate Pakistani<br><span class="accent">Phone Number</span></h2>
+          <p class="card-sub">Enter a Pakistani mobile number to validate</p>
+
+          <label class="field-label" for="phone-input">Mobile number</label>
+          <div class="input-row" id="input-row">
+            <div class="country-code">
+              <svg viewBox="0 0 24 16" class="flag">
+                <rect width="24" height="16" fill="#01411C"/>
+                <rect width="6" height="16" fill="#fff"/>
+                <g fill="#fff" transform="translate(16,8)">
+                  <circle r="3.4"/>
+                  <circle r="3.4" fill="#01411C" cx="1.2" cy="-0.6"/>
+                  <path d="M3.6 -4 L4.1 -2 L6.2 -2 L4.5 -0.7 L5.1 1.4 L3.6 0.1 L2.1 1.4 L2.7 -0.7 L1 -2 L3.1 -2 Z"/>
+                </g>
+              </svg>
+              <span>+92</span>
+            </div>
+            <input type="tel" id="phone-input" placeholder="301 2345678" inputmode="numeric" autocomplete="off" maxlength="14">
+          </div>
+
+          <div class="result" id="result" data-state="idle" role="status" aria-live="polite">
+            <span class="result-icon" id="result-icon"></span>
+            <div>
+              <p class="result-title" id="result-title">Waiting for input</p>
+              <p class="result-message" id="result-message">Start typing a mobile number to see it validated live.</p>
+            </div>
+          </div>
+
+          <div class="checklist" id="checklist">
+            <span class="check" data-check="prefix"><i></i>Starts with 03</span>
+            <span class="check" data-check="length"><i></i>11 digits</span>
+            <span class="check" data-check="format"><i></i>Valid format</span>
+          </div>
+        </section>
+      </div>
+
     </div>
-    <script src="script.js"></script>
-  </body>
+  </header>
+
+  <footer class="site-footer">
+    <p>Built with HTML, CSS, JavaScript and regular expressions &mdash; all validation runs locally in your browser.</p>
+  </footer>
+
+</div>
+
+<script src="script.js"></script>
+</body>
 </html>
